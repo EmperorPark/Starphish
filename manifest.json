@@ -12,8 +12,8 @@
     //     "service_worker": "background.js"
     //     },
     "content_scripts" : [ { 
-        "matches" : ["<all_urls>"],
-        "js" : ["common.js"]
+        "matches" : ["https://mail.google.com/*"],
+        "js" : ["common.js", "index.js"]
         } ],
     "manifest_version" : 3,
     "name" : "KShiled_Proj",
