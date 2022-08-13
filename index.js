@@ -2,8 +2,10 @@ let hello = "Hello World!"
 
 console.log(hello);
 
-let aTags = getElementByXpath("/html/body/div[7]/div[3]/div/div[2]/div[2]/div/div/div/div/div[2]/div/div[1]/div").getElementsByTagName("a");
+setTimeout(()=>{
+    document.querySelectorAll("body > div:nth-child(20) > div.nH > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) a").forEach(item => {
+        item.removeAttribute("href");
+        //console.log(item);
+    });
 
-for (let i in aTags) {
-    i.removeAttribute("href");
-}
+}, 10000);
