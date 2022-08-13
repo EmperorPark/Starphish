@@ -13,7 +13,7 @@
         },
     "content_scripts" : [ { 
         "matches" : ["https://mail.google.com/*"],
-        "js" : ["index.js"]
+        "js" : ["js/index.js"]
         } ],
     "manifest_version" : 3,
     "name" : "KShiled_Proj",
