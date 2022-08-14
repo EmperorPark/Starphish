@@ -19,3 +19,4 @@ function clickRemoveBtn(){
 document.getElementById("btnOff").addEventListener('click', clickBtnOff, false);
 document.getElementById("btnRemoveLink").addEventListener('click', clickRemoveLink, false);
 document.getElementById("btnRemoveBtn").addEventListener('click', clickRemoveBtn, false);
+
