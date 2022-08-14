@@ -8,30 +8,32 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/import.css">
 	<link rel="stylesheet" href="css/popup.css">
+	<style>
+		
+	</style>
 </head>
 
 
-<script defer="defer" src="popup.js"></script>
 
 <body style="width: 500px; background-color: #cdcdeb; ">
 	<h3>단계</h3>
 	<div class="my-3 justify-content-around col">
 		<div class="my_box row p-3">
-			<button class="btn col-3 active">끄기</button>
-			<div class="my_text col-xs-2">여기에 마우스를 가져오세요 </div>
+			<button class="btn col-3 btn-primary active" id="btnOff">끄기</button>
+			<button type="button" class="btn bi-three-dots-vertical" data-toggle="tooltip" data-placement="right" title="Tooltip on right"></button>
 		</div>
 
 		<div class="my_box row p-3">
-			<button class="btn col-3 active">링크제거</button>
-			<div class="my_text col-xs-2">여기에 마우스를 가져오세요 </div>
+			<button class="btn col-3 active" id="btnRemoveLink">링크제거</button>
+			<button type="button" class="btn bi-three-dots-vertical" data-toggle="tooltip" data-placement="right" title="Tooltip on right"></button>
 		</div>
-
 
 		<div class="my_box row p-3">
-			<button class="btn col-3 active">버튼제거</button>
-			<div class="my_text col-xs-2">여기에 마우스를 가져오세요 </div>
-		</div>
+			<button class="btn col-3 active" id="btnRemoveBtn" >버튼제거</button>
+			<button type="button" class="btn bi-three-dots-vertical" data-toggle="tooltip" data-placement="right" title="Tooltip on right"></button>		
 	</div>
+
+	<script defer="defer" src="popup.js"></script>
 
 </body>
 
