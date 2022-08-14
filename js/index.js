@@ -3,24 +3,20 @@ let hello = "Hello World!"
 
 console.log(hello);
 
-const emailContentArea = "body > div:nth-child(20) > div.nH > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)";
-const aInEmailContentArea = "body > div:nth-child(20) > div.nH > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) a";
+const emailContentArea = "body";
+const aInEmailContentArea = "body a";
 
-function delHref() {
-    document.querySelectorAll(aInEmailContentArea).forEach(item => {
-        console.log("action");
-        item.removeAttribute("href");
-    });
-}
+
 
 elementToObserve = document.querySelector("body");
 
 observer = new MutationObserver(function(mutationsList, observer) {
     console.log(mutationsList);
-    if(document.querySelector(emailContentArea) !== null) {
-        console.log("exist!!");
-        delHref();
-    } 
+    //if(document.querySelector(emailContentArea) !== null) {
+        //console.log("exist!!");
+        delHref(aInEmailContentArea);
+        //ifameDelHref(emailContentArea);
+    //}
     // else {
     //     console.log("TT");
     // }
@@ -28,11 +24,13 @@ observer = new MutationObserver(function(mutationsList, observer) {
     
 });
 
+
+
 observer.observe(elementToObserve, {characterData: false, childList: true, attributes: false});
 
 
 let timer = setInterval(()=>{
-    delHref();
+    delHref(aInEmailContentArea);
 }, 100);
 
 setTimeout(()=>{
