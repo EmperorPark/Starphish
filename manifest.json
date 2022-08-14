@@ -6,7 +6,7 @@
             "48": "images/icon48.png"
         },
         "default_popup": "popup.html",
-        "default_title": "고슴도치"
+        "default_title": "StarPhish"
         },
         "background": {
             "service_worker": "background.js"
@@ -17,6 +17,6 @@
         "js" : ["js/index.js", "js/common.js"]
         } ],
     "manifest_version" : 3,
-    "name" : "KShiled_Proj",
+    "name" : "StarPhish",
     "version" : "0.1"
 }
