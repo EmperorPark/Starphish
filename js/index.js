@@ -1,38 +1,16 @@
 let hello = "Hello World!"
 
+const mode = 1;
 
 console.log(hello);
 
-const emailContentArea = "body";
-const aInEmailContentArea = "body a";
+const $$$ = new common();
 
+if(mode === 1){
+    let timer = setInterval(() => {
+        //console.log('interval');
+        $$$.googleAmpMailChange();
+        $$$.delHref(emailContentArea);
+    }, 100);
+}
 
-
-elementToObserve = document.querySelector("body");
-
-observer = new MutationObserver(function(mutationsList, observer) {
-    console.log(mutationsList);
-    //if(document.querySelector(emailContentArea) !== null) {
-        //console.log("exist!!");
-        delHref(aInEmailContentArea);
-        //ifameDelHref(emailContentArea);
-    //}
-    // else {
-    //     console.log("TT");
-    // }
-    
-    
-});
-
-
-
-observer.observe(elementToObserve, {characterData: false, childList: true, attributes: false});
-
-
-let timer = setInterval(()=>{
-    delHref(aInEmailContentArea);
-}, 100);
-
-setTimeout(()=>{
-    clearInterval(timer);
-}, 10000);

@@ -1,4 +1,4 @@
 
-if (typeof importScripts !== "undefined") {
-    importScripts("js/common.js");
-}
+// if (typeof importScripts !== "undefined") {
+//     importScripts("js/common.js");
+// }
