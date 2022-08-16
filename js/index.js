@@ -1,16 +1,24 @@
-let hello = "Hello World!"
-
-const mode = 1;
-
-console.log(hello);
+let mode = 1;
 
 const $$$ = new common();
 
-if(mode === 1){
-    let timer = setInterval(() => {
-        //console.log('interval');
-        $$$.googleAmpMailChange();
-        $$$.delHref(emailContentArea);
-    }, 100);
-}
+let timer;
+
+chrome.storage.sync.get('mode', (data) => {
+    mode = data.mode;
+    console.log(mode);
+    if(mode === 1){
+        console.log(mode);
+        timer = setInterval(() => {
+            $$$.googleAmpMailChange();
+            $$$.delHref($$$.emailContentAreaStr);
+        }, 500);
+    
+        // setTimeout(() => {
+        //     clearInterval(timer);
+        // }, 15000);
+    }
+});
+
+
 

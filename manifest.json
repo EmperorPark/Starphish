@@ -3,9 +3,9 @@
     "description": "I hate phishing",
     "version" : "0.1",
     "manifest_version" : 3,
-    // "background": {
-    //     "service_worker": "background.js"
-    // },
+    "background": {
+        "service_worker": "background.js"
+    },
     "action": {
         "default_popup": "popup.html",
         "default_title": "StarPhish",
@@ -17,7 +17,6 @@
     },
     "content_scripts" : [ { 
         "matches" : ["https://mail.google.com/*"],
-        //"matches" : ["<all_urls>"],
         "js" : ["js/common.js", "js/index.js"]
     } ],
     "icons": {
@@ -25,5 +24,6 @@
         "48": "/images/icon48.png",
         "128": "/images/icon128.png"
     },
+    "permissions": ["storage"],
     "options_page": "options.html"
 }

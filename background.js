@@ -1,4 +1,8 @@
+// 0: off
+// 1: remove link
+// 2: html raw
+let mode = 1;
 
-// if (typeof importScripts !== "undefined") {
-//     importScripts("js/common.js");
-// }
+chrome.runtime.onInstalled.addListener(() => {
+    chrome.storage.sync.set({ mode:mode });
+});
