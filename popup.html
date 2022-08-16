@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 		<!-- <link rel="stylesheet" href="css/import.css"> -->
 		<link rel="stylesheet" href="css/popup.css">
 	</head>
@@ -21,6 +22,8 @@
 		<div class="container text-center justify-content-around col">
 			<div class="container text-center p-3">
 				<button class="container text-center btn btn-warning" id="btnTmpOff" data-toggle="tooltip" data-placement="right" title="현재 메일의 보안 설정을 임시로 변경합니다.">
+					<span class="glyphicon glyphicon-repeat"></span>
+					<!-- <span class="glyphicon glyphicon-lock"></span> -->
 					원래대로
 				</button>
 			</div>
@@ -33,18 +36,21 @@
 		<div class="container text-center justify-content-around col">
 			<div class="container text-center p-3">
 				<button class="container text-center btn btn-secondary" id="btnOff" data-toggle="tooltip" data-placement="right" title="StarPhish의 기능을 끕니다.">
+					<span class="glyphicon glyphicon-off"></span>	
 					끄기
 				</button>
 			</div>
 
 			<div class="container text-center p-3">
 				<button class="container text-center btn btn-danger" id="btnRemoveLink" data-toggle="tooltip" data-placement="right" title="메일 본문의 링크를 삭제합니다.">
+					<span class="glyphicon glyphicon-ban-circle"></span>
 					링크제거
 				</button>
 			</div>
 
 			<div class="container text-center p-3">
 				<button class="container text-center btn btn-secondary" id="btnRaw" data-toggle="tooltip" data-placement="right" title="메일 본문을 원시 형태로 표시합니다.">
+					<span class="glyphicon glyphicon-duplicate"></span>
 					HTML 보기
 				</button>
 			</div>
@@ -55,6 +61,7 @@
 		<div class="container text-center justify-content-around col">
 			<div class="container text-center p-3">
 				<button class="container text-center btn btn-info" id="btnUsage" data-toggle="tooltip" data-placement="right" title="사용법 및 안내를 표시합니다.">
+					<span class="glyphicon glyphicon-book"></span>
 					사용법
 				</button>
 			</div>
