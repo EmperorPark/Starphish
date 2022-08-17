@@ -1,13 +1,38 @@
 const btnOffNode = document.getElementById('btnOff');
 const btnRemoveLinkNode = document.getElementById('btnRemoveLink');
 const btnRawNode = document.getElementById('btnRaw');
-const btnTmpOffNode = document.getElementById('btnTmpOff');
+const btnTmpToggleNode = document.getElementById('btnTmpToggle');
+const textTmpToggleNode = document.getElementById('textTmpToggle');
+const iconToOriginalNode = document.getElementById('iconToOriginal');
+const iconToSecurityModeNode = document.getElementById('iconToSecurityMode');
 const btnUsageNode = document.getElementById('btnUsage');
+
+let tmpCurrentSettingOriginalMode = false;
+
+function sendStateCheckSignal() {
+    chrome.tabs.query({active: true, currentWindow: true},function(tabs) {
+        chrome.tabs.sendMessage(
+            tabs[0].id, 
+            {
+                data: {
+                    message: "stateCheck"
+                }
+            }, 
+            function(response) {
+                if(response !== undefined) {
+                    console.log(response);
+                    tmpCurrentSettingOriginalMode = response.tmpCurrentSettingOriginalMode;
+                }
+            }
+        );
+    }); 
+}
 
 function constructOptions() {
     chrome.storage.sync.get('mode', (data) => {
         let currentMode = data.mode;
         console.log(currentMode);
+
         switch (currentMode) {
             case 0:
                 clickBtnOff();
@@ -20,6 +45,8 @@ function constructOptions() {
                 clickBtnRaw();
                 break;
         }
+
+        sendStateCheckSignal();
     });
 }
 
@@ -63,23 +90,49 @@ btnOffNode.addEventListener('click', clickBtnOff, false);
 btnRemoveLinkNode.addEventListener('click', clickBtnRemoveLink, false);
 btnRawNode.addEventListener('click', clickBtnRaw, false);
 
-
-function clickBtnTmpOff() {
-    if(btnTmpOffNode.classList.contains('btn-warning')) {
-        btnTmpOffNode.classList.remove('btn-warning');
-        btnTmpOffNode.classList.add('btn-success');
-        btnTmpOffNode.textContent = '보안켜기'
-    }
-    else if(btnTmpOffNode.classList.contains('btn-success')) {
-        btnTmpOffNode.classList.remove('btn-success');
-        btnTmpOffNode.classList.add('btn-warning');
-        btnTmpOffNode.textContent = '원래대로'
-    }
-    
-    
+function tmpToggleBtnToSecurityMode() {
+    btnTmpToggleNode.classList.remove('btn-warning');
+    btnTmpToggleNode.classList.add('btn-success');
+    textTmpToggleNode.textContent = '보안켜기'
+    iconToOriginalNode.hidden = true;
+    iconToSecurityModeNode.hidden = false;
 }
 
-btnTmpOffNode.addEventListener('click', clickBtnTmpOff, false);
+function tmpToggleBtnToOriginalMode() {
+    btnTmpToggleNode.classList.remove('btn-success');
+    btnTmpToggleNode.classList.add('btn-warning');
+    textTmpToggleNode.textContent = '원래대로'
+    iconToOriginalNode.hidden = false;
+    iconToSecurityModeNode.hidden = true;
+}
+
+function clickBtnTmpToggle() {
+    chrome.tabs.query({active: true, currentWindow: true},function(tabs) {
+        chrome.tabs.sendMessage(
+            tabs[0].id, 
+            {
+                data: {
+                    message: "toggleMode"
+                    , tmpCurrentSettingOriginalMode: tmpCurrentSettingOriginalMode
+                }
+            }, 
+            function(response) {
+                console.log(response);
+                if(response != null) {
+                    tmpCurrentSettingOriginalMode = response.tmpCurrentSettingOriginalMode;
+                    if(tmpCurrentSettingOriginalMode) {
+                        tmpToggleBtnToSecurityMode();
+                    } else {
+                        tmpToggleBtnToOriginalMode();
+                    }
+                }
+            }
+        );
+    }); 
+}
+
+
+btnTmpToggleNode.addEventListener('click', clickBtnTmpToggle, false);
 
 function clickUsageBtn() {
     if (chrome.runtime.openOptionsPage) {

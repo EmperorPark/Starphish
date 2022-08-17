@@ -1,0 +1,4 @@
+/* 스타일 충돌 해소 */
+hr {
+    border-top: 1px solid silver;
+}
