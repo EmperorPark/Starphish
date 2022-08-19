@@ -9,6 +9,7 @@ const btnUsageNode = document.getElementById('btnUsage');
 
 let tmpCurrentSettingOriginalMode = false;
 
+
 function sendStateCheckSignal() {
     chrome.tabs.query({active: true, currentWindow: true},function(tabs) {
         chrome.tabs.sendMessage(
@@ -144,4 +145,31 @@ function clickUsageBtn() {
 
 btnUsageNode.addEventListener('click', clickUsageBtn, false);
 
+const phishingCommonSenses = [
+    {
+        ko: "Proofpoint가 조사한 조직의 83%가 2018년에 피싱 공격을 경험했다고 합니다.",
+        en: "83% of organizations surveyed by Proofpoint said they experienced phishing attacks in 2018."
+    },
+    {
+        ko: "알고 계시나요? 2021년 2분기에 차단된 악성 첨부파일은 약 34억 건이라고 합니다.",
+        en: "Did you know? Mail Anti-Virus blocked 34,224,215 malicious attachments in Q2."
+    },
+    {
+        ko: "택배사, 네이버, 카카오톡 등은 가장 많이 사칭되어 피싱메일에 이용됩니다.",
+        en: "DHL, Microsoft, WhatsApp, etc are top phishing list of most imitated brands"
+    },
+    {
+        ko: "코로나 19 이후 관련 피싱 메일이 매우 크게 증가 했다고 하네요.",
+        en: "After COVID-19, related phishing emails increased significantly."
+    },
+];
+
+function displayPhishingCommonSense() {
+    let RandomArr = new Uint32Array(1);
+    window.crypto.getRandomValues(RandomArr);
+
+    document.getElementById("phishingCommonSenseArea").textContent = phishingCommonSenses[RandomArr[0]%phishingCommonSenses.length].ko;
+}
+
+displayPhishingCommonSense();
 
