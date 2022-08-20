@@ -3,6 +3,7 @@
 function common() {
     this.iframeList = [];
     this.ampRegExp = /(?<=<body.*>)(.*?)(?=<\/body>)/;
+    this.uriRegExp = /((http|https):\/\/)*((\w+)[.])+(ca|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|cr|cs|cu|cv|cw|cx|cy|cz|ccTLD|de|dj|dk|dm|do|dz|ec|ee|eg|er|es|et|eu|ccTLD|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gg|gh|gi|gl|gm|gn|gp|gq|gr|gs|gt|gu|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|il|im|in|io|iq|ir|is|it|je|jm|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|me|mg|mh|mk|ml|mm|mn|mo|mp|mq|mr|ms|mt|mu|mv|mw|mx|my|mz|na|nc|ne|nf|ng|ni|nl|no|np|nr|nu|nz|om|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|ps|pt|pw|py|qa|re|ro|rs|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sk|sl|sm|sn|so|sr|ss|st|su|sv|sy|sx|sz|tc|td|tf|tg|th|tj|tk|tl|tm|tn|to|tr|tt|tv|tw|tz|ua|ug|uk|um|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|yu|za|zm|zr|zw)(\/(\w*))*$/;
     this.emailContentAreaStr = "body > div:nth-child(20) > div.nH > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)";
     this.gmailBoxListAreaStr = "body > div:nth-child(20) > div.nH > div > div:nth-child(2) > div:nth-child(1)";
 };
@@ -10,12 +11,21 @@ function common() {
 common.prototype.delHref = function() {
 
     document.querySelectorAll(this.emailContentAreaStr + " a[href]").forEach(item => {
+
+        let displayMessage;
         item.setAttribute("href_bak", item.getAttribute("href"));
         item.removeAttribute("href");
 
         item.setAttribute("data-toggle", "tooltip");
         item.setAttribute("data-placement", "bottom");
-        item.setAttribute("title", "해당 링크는 StarPhish에 의해 비활성화 되었습니다.\n피싱으로 인한 사기 및 해킹 방지를 위해 링크를 사용하지 않고 메일의 목적을 판단할 수 있는 경우 링크를 사용하지 않는것이 권장됩니다.\n링크를 이용하셔야 하는 경우 해당 메일과 링크의 안전함을 판단 및 확인 후 링크를 이용하시기 바랍니다.\n(실제 링크: " + item.getAttribute("href_bak") + ")");
+
+        displayMessage = "해당 링크는 StarPhish에 의해 비활성화 되었습니다.\n피싱으로 인한 사기 및 해킹 방지를 위해 링크를 사용하지 않고 메일의 목적을 판단할 수 있는 경우 링크를 사용하지 않는것이 권장됩니다.\n링크를 이용하셔야 하는 경우 해당 메일과 링크의 안전함을 판단 및 확인 후 링크를 이용하시기 바랍니다.\n(실제 링크: " + item.getAttribute("href_bak") + ")";
+
+        if(this.uriRegExp.test(item.textContent) && item.textContent !== item.getAttribute("href_bak")) {
+            displayMessage += "\n(표시링크: " + item.textContent + ")\n표시되는 링크와 실제 링크가 다릅니다!!!! 피싱에 주의하세요!!!";
+        }
+        item.setAttribute("title", displayMessage);
+
     });
 
 }
