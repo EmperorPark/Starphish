@@ -9,7 +9,6 @@ const btnUsageNode = document.getElementById('btnUsage');
 
 let tmpCurrentSettingOriginalMode = false;
 
-
 function sendStateCheckSignal() {
     chrome.tabs.query({active: true, currentWindow: true},function(tabs) {
         chrome.tabs.sendMessage(
@@ -48,6 +47,10 @@ function constructOptions() {
         }
 
         sendStateCheckSignal();
+    });
+
+    chrome.tabs.query({active: true, currentWindow: true},function(tabs) {
+        btnTmpToggleNode.disabled = !tabs[0].url.includes("mail.google.com");
     });
 }
 
@@ -108,7 +111,11 @@ function tmpToggleBtnToOriginalMode() {
 }
 
 function clickBtnTmpToggle() {
+
     chrome.tabs.query({active: true, currentWindow: true},function(tabs) {
+
+        if(!tabs[0].url.includes("mail.google.com")) return;
+
         chrome.tabs.sendMessage(
             tabs[0].id, 
             {
