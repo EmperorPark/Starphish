@@ -33,9 +33,11 @@ function constructOptions() {
         let currentMode = data.mode;
         console.log(currentMode);
 
+        btnTmpToggleNode.disabled = false;
         switch (currentMode) {
             case 0:
                 clickBtnOff();
+                btnTmpToggleNode.disabled = true;
                 break;
             case 1:
             default:
@@ -50,7 +52,7 @@ function constructOptions() {
     });
 
     chrome.tabs.query({active: true, currentWindow: true},function(tabs) {
-        btnTmpToggleNode.disabled = !tabs[0].url.includes("mail.google.com");
+        btnTmpToggleNode.disabled = !tabs[0].url.includes("mail.google.com") && btnTmpToggleNode.disabled;
     });
 }
 
